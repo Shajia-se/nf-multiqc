@@ -15,7 +15,7 @@ process multiqc_collect {
 
   output:
     path "${params.multiqc_report_name}"
-    path "multiqc_data"
+    path "multiqc_data", optional: true
 
   script:
   def default_paths = [
