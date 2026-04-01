@@ -18,23 +18,56 @@ process multiqc_collect {
     path "multiqc_data", optional: true
 
   script:
+  def flatRoot = params.flat_output_root ? params.flat_output_root.toString() : null
   def default_paths = [
-    "${params.pipelines_root}/nf-fastqc/fastqc_output",
-    "${params.pipelines_root}/nf-fastp/fastp_output",
-    "${params.pipelines_root}/nf-cutadapt/cutadapt_output",
-    "${params.pipelines_root}/nf-bwa/bwa_output",
-    "${params.pipelines_root}/nf-picard/picard_output",
-    "${params.pipelines_root}/nf-chipfilter/chipfilter_output",
-    "${params.pipelines_root}/nf-macs3/macs3_output",
-    "${params.pipelines_root}/nf-idr/idr_output",
-    "${params.pipelines_root}/nf-idr-pseudo/idr_pseudo_output",
-    "${params.pipelines_root}/nf-chipseeker/chipseeker_output",
-    "${params.pipelines_root}/nf-frip/frip_output",
-    "${params.pipelines_root}/nf-bamcoverage/bamcoverage_output",
-    "${params.pipelines_root}/nf-deeptools-heatmap/deeptools_heatmap_output",
-    "${params.pipelines_root}/nf-diffbind/diffbind_output",
-    "${params.pipelines_root}/nf-homer/homer_output",
-    "${params.pipelines_root}/nf-result-delivery/result_delivery_output"
+    flatRoot
+      ? "${flatRoot}/fastqc_output"
+      : "${params.pipelines_root}/nf-fastqc/fastqc_output",
+    flatRoot
+      ? "${flatRoot}/fastp_output"
+      : "${params.pipelines_root}/nf-fastp/fastp_output",
+    flatRoot
+      ? "${flatRoot}/cutadapt_output"
+      : "${params.pipelines_root}/nf-cutadapt/cutadapt_output",
+    flatRoot
+      ? "${flatRoot}/bwa_output"
+      : "${params.pipelines_root}/nf-bwa/bwa_output",
+    flatRoot
+      ? "${flatRoot}/picard_output"
+      : "${params.pipelines_root}/nf-picard/picard_output",
+    flatRoot
+      ? "${flatRoot}/chipfilter_output"
+      : "${params.pipelines_root}/nf-chipfilter/chipfilter_output",
+    flatRoot
+      ? "${flatRoot}/macs3_output"
+      : "${params.pipelines_root}/nf-macs3/macs3_output",
+    flatRoot
+      ? "${flatRoot}/idr_output"
+      : "${params.pipelines_root}/nf-idr/idr_output",
+    flatRoot
+      ? "${flatRoot}/idr_pseudo_output"
+      : "${params.pipelines_root}/nf-idr-pseudo/idr_pseudo_output",
+    flatRoot
+      ? "${flatRoot}/chipseeker_output"
+      : "${params.pipelines_root}/nf-chipseeker/chipseeker_output",
+    flatRoot
+      ? "${flatRoot}/frip_output"
+      : "${params.pipelines_root}/nf-frip/frip_output",
+    flatRoot
+      ? "${flatRoot}/bamcoverage_output"
+      : "${params.pipelines_root}/nf-bamcoverage/bamcoverage_output",
+    flatRoot
+      ? "${flatRoot}/deeptools_heatmap_output"
+      : "${params.pipelines_root}/nf-deeptools-heatmap/deeptools_heatmap_output",
+    flatRoot
+      ? "${flatRoot}/diffbind_output"
+      : "${params.pipelines_root}/nf-diffbind/diffbind_output",
+    flatRoot
+      ? "${flatRoot}/homer_output"
+      : "${params.pipelines_root}/nf-homer/homer_output",
+    flatRoot
+      ? "${flatRoot}/result_delivery_output"
+      : "${params.pipelines_root}/nf-result-delivery/result_delivery_output"
   ]
 
   def extra_paths = []
